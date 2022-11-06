@@ -1,0 +1,16 @@
+//test the priority of  unary operator and binary operator
+
+
+
+float test(float a)
+{
+    a=0.9;
+    return test(2);
+}
+
+int main(){
+    int a=9, b;
+    const float c=0.9;
+    test(a);
+    return 0;
+}
