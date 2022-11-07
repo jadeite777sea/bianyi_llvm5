@@ -5,11 +5,9 @@
 
 class Type
 {
-private:
-    int kind;
-protected:
-    enum {INT, VOID, FUNC,ARRAY,FLOAT};
 public:
+    int kind;
+    enum {INT, VOID, FUNC,ARRAY,FLOAT};
     Type(int kind) : kind(kind) {};
     virtual ~Type() {};
     virtual std::string toStr() = 0;

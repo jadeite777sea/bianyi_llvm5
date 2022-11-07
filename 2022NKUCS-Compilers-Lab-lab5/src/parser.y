@@ -135,6 +135,11 @@ BlankStmt
     {
         $$=new BlankStmt();
     }
+    |
+    LBRACE RBRACE
+    {
+        $$=new BlankStmt();
+    }
     ;
 
 BlockStmt
@@ -199,6 +204,11 @@ PrimaryExp
     | FLOATING {
     SymbolEntry* se = new ConstantSymbolEntry(TypeSystem::floatType, $1);
     $$ = new Constant(se);
+    }
+    |LPAREN Exp RPAREN
+    {
+
+        $$=$2;
     }
     ;
 UnaryExp
@@ -293,6 +303,12 @@ MULExp
         if ($1->getType()->isFloat() || $3->getType()->isFloat())
         se->type=TypeSystem::floatType;
         $$ = new BinaryExpr(se, BinaryExpr::DIV, $1, $3);
+    }
+    |
+    MULExp MOD UnaryExp
+    {
+        SymbolEntry *se= new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        $$ = new BinaryExpr(se, BinaryExpr::MOD, $1, $3);
     }
     ;
 AddExp

@@ -3,8 +3,9 @@
 
 #include <fstream>
 #include"Type.h"
+#include"SymbolTable.h"
 
-class SymbolEntry;
+
 
 class Node
 {
@@ -21,10 +22,10 @@ public:
 class ExprNode : public Node
 {
 public:
-    Type* type;
+    
     SymbolEntry *symbolEntry;
     ExprNode(SymbolEntry *symbolEntry) : symbolEntry(symbolEntry){};
-    virtual Type* getType() { return type; };
+    virtual Type* getType() { return this->symbolEntry->type; };
     
 };
 
@@ -32,10 +33,9 @@ public:
 
 class BinaryExpr : public ExprNode
 {
-private:
+public:
     int op;
     ExprNode *expr1, *expr2;
-public:
     enum {ADD, SUB, AND, OR, LESS, BIGER,EQ ,BE,LE,NE,MUL,DIV,MOD};
     BinaryExpr(SymbolEntry *se, int op, ExprNode*expr1, ExprNode*expr2) : ExprNode(se), op(op), expr1(expr1), expr2(expr2){};
     void output(int level);

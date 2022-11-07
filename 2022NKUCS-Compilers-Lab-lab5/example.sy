@@ -1,16 +1,12 @@
-//test the priority of  unary operator and binary operator
+int a, b, d;
 
+int set_a(int val) { a = val; return a; }
+int set_b(int val) { b = val; return b; }
+int set_d(int val) { d = val; return d; }
 
-
-float test(float a)
+int main()
 {
-    a=0.9;
-    return test(2);
-}
-
-int main(){
-    int a=9, b;
-    const float c=0.9;
-    test(a);
+    a = 2; b = 3;
+    if (set_a(0) && set_b(1)) {}
     return 0;
 }
